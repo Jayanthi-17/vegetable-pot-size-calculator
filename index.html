@@ -112,6 +112,12 @@
         margin-bottom: 8px;
       }
       
+      .varieties {
+        font-style: italic;
+        color: #666;
+        margin-top: 5px;
+      }
+      
       @media (max-width: 768px) {
         body {
           padding: 15px;
@@ -226,6 +232,7 @@
                 <li>
                   <strong>${v.name}</strong> (minimum ${v.minGallon} gallons, 
                   ${v.perContainer} plants, depth ${v.depth})
+                  <div class="varieties">Varieties: ${v.varieties}</div>
                 </li>
               `).join('')}
             </ul>

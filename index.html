@@ -168,18 +168,35 @@
       <div class="output" id="output"></div>
     `;
 
-    // JavaScript functionality
+    // JavaScript functionality with updated vegetable data
     const vegetables = [
-      { name: 'Beans, snap', minGallon: 2, diameter: '8–9 inches', perContainer: 3, depth: '8–10 inches', varieties: 'Bush "Blue Lake", Bush "Romano", "Tender Crop"' },
-      { name: 'Broccoli', minGallon: 5, diameter: '12 inches', perContainer: 1, depth: '12–18 inches', varieties: '"DeCicco", "Green Comet"' },
-      { name: 'Carrots', minGallon: 1, diameter: '6–7 inches', perContainer: '3–4', depth: '12–18 inches', varieties: '"Danvers Half Long", "Short "n Sweet", "Tiny Sweet"' },
-      { name: 'Cucumbers', minGallon: 5, diameter: '12 inches', perContainer: 2, depth: '12–18 inches', varieties: '"Patio Pik", "Pot Luck", "Spacemaster"' },
-      { name: 'Eggplant', minGallon: 5, diameter: '12 inches', perContainer: 1, depth: '12–18 inches', varieties: '"Black Beauty", "Ichiban", "Slim Jim"' },
-      { name: 'Lettuce', minGallon: 1, diameter: '6–7 inches', perContainer: '3–4', depth: '6–8 inches', varieties: '"Ruby", "Salad Bowl"' },
-      { name: 'Onions (bulbing)', minGallon: 2, diameter: '8–9 inches', perContainer: '3–4', depth: '12–18 inches', varieties: '"White Sweet Spanish", "Yellow Sweet Spanish"' },
-      { name: 'Peppers', minGallon: 3, diameter: '8–9 inches', perContainer: 1, depth: '12–18 inches', varieties: '"Cayenne", "Long Red", "Sweet Banana", "Wonder", "Yolo"' },
-      { name: 'Radishes', minGallon: 2, diameter: '8–9 inches', perContainer: '5–6', depth: '6–8 inches', varieties: '"Cherry Belle", "Icicle"' },
-      { name: 'Tomatoes', minGallon: 5, diameter: '12 inches', perContainer: 1, depth: '18–24 inches', varieties: '"Early Girl", "Patio", "Small Fry", "Sweet 100", "Tiny Tim"' }
+      { name: 'Beets', minGallon: 2, diameter: '12 inches', perContainer: '~9', depth: '8–10 inches', spacing: '2–3 inches', varieties: 'Detroit Dark Red, Bull\'s Blood, Early Wonder, Red Ace, Chioggia' },
+      { name: 'Bok Choi (Pak Choi)', minGallon: 2, diameter: '10–12 inches', perContainer: '3–5', depth: '8–10 inches', spacing: '4–6 inches', varieties: 'Tatsoi, Mei Qing Choi, Baby Choi' },
+      { name: 'Broccoli', minGallon: 5, diameter: '12–14 inches', perContainer: '1 (2–3 in trough)', depth: '12–18 inches', spacing: '18 inches', varieties: 'De Cicco, Calabrese, Green Magic, Waltham 29' },
+      { name: 'Bush/Snap Beans', minGallon: 2, diameter: '8–10 inches', perContainer: '2–3', depth: '8–10 inches', spacing: '4–6 inches', varieties: 'Blue Lake Bush, Tendergreen, Contender' },
+      { name: 'Carrots', minGallon: 2, diameter: '12 inches', perContainer: '10–12', depth: '10–12 inches', spacing: '1.5–2 inches', varieties: 'Thumbelina, Parisian, Little Finger' },
+      { name: 'Chard (Swiss or Rainbow)', minGallon: 3, diameter: '12 inches', perContainer: '2–3', depth: '8–10 inches', spacing: '6–8 inches', varieties: 'Bright Lights, Fordhook Giant, Rhubarb' },
+      { name: 'Collards', minGallon: '3–5', diameter: '12–14 inches', perContainer: '1–2', depth: '10–12 inches', spacing: '12–18 inches', varieties: 'Georgia Southern, Champion' },
+      { name: 'Cucumbers (Bush)', minGallon: 5, diameter: '12–14 inches', perContainer: '1–2', depth: '10–12 inches', spacing: '12 inches', varieties: 'Spacemaster, Bush Pickle' },
+      { name: 'Eggplant', minGallon: 5, diameter: '12–14 inches', perContainer: '1', depth: '12–14 inches', spacing: '18 inches', varieties: 'Fairy Tale, Patio Baby' },
+      { name: 'Horseradish', minGallon: '5+ gallons (deep)', diameter: '12–14 inches', perContainer: '1 root', depth: '18+ inches', spacing: '12–18 inches', varieties: 'Root cuttings only' },
+      { name: 'Kale', minGallon: '3–5', diameter: '12–14 inches', perContainer: '1–2', depth: '10–12 inches', spacing: '12 inches', varieties: 'Dwarf Blue Curled, Lacinato, Red Russian' },
+      { name: 'Leeks', minGallon: '3–5', diameter: '12–14 inches', perContainer: '6–8', depth: '10–12 inches', spacing: '2–3 inches', varieties: 'King Richard, Lancelot, Tadorna' },
+      { name: 'Lettuce (Leaf)', minGallon: 2, diameter: '12 inches', perContainer: '6–10', depth: '6–8 inches', spacing: '3–4 inches', varieties: 'Black Seeded Simpson, Salad Bowl' },
+      { name: 'Mustard Greens', minGallon: '2–3', diameter: '10–12 inches', perContainer: '4–6', depth: '8–10 inches', spacing: '4–6 inches', varieties: 'Southern Giant, Green Wave, Red Giant' },
+      { name: 'Okra', minGallon: '5+', diameter: '14–16 inches', perContainer: '1', depth: '12–18 inches', spacing: '12–18 inches', varieties: 'Baby Bubba, Clemson Spineless' },
+      { name: 'Onions (Bulbing)', minGallon: '3–5', diameter: '12–14 inches', perContainer: '4–6 bulbs', depth: '10–12 inches', spacing: '3–4 inches', varieties: 'Walla Walla, Candy' },
+      { name: 'Onions – Green (Scallions)', minGallon: 2, diameter: '10–12 inches', perContainer: '10–12', depth: '6–8 inches', spacing: '1.5–2 inches', varieties: 'White Lisbon, Evergreen Bunching' },
+      { name: 'Peppers', minGallon: '3–5', diameter: '12–14 inches', perContainer: '1 (2 in 10+ gal)', depth: '12+ inches', spacing: '12–15 inches', varieties: 'Lunchbox, Jalapeño, Sweet Banana' },
+      { name: 'Pole Beans', minGallon: 5, diameter: '12–14 inches', perContainer: '1–2', depth: '12+ inches', spacing: '6 inches', varieties: 'Kentucky Blue, Fortex, Rattlesnake' },
+      { name: 'Potatoes', minGallon: '10+', diameter: '14–16 inches', perContainer: '2–3 seed potatoes', depth: '12–16 inches', spacing: '10–12 inches', varieties: 'Yukon Gold, Red Norland, Fingerling' },
+      { name: 'Radishes', minGallon: '1–2', diameter: '10–12 inches', perContainer: '12–16', depth: '6–8 inches', spacing: '1.5–2 inches', varieties: 'Cherry Belle, French Breakfast' },
+      { name: 'Spinach', minGallon: 2, diameter: '10–12 inches', perContainer: '6–8', depth: '6–8 inches', spacing: '3–4 inches', varieties: 'Bloomsdale, Space, Tyee' },
+      { name: 'Swiss Chard', minGallon: 3, diameter: '12 inches', perContainer: '2–3', depth: '8–10 inches', spacing: '6–8 inches', varieties: 'Bright Lights, Lucullus' },
+      { name: 'Tomatillos', minGallon: '5+', diameter: '14–18 inches', perContainer: '1 (need 2 nearby)', depth: '12–18 inches', spacing: '18–24 inches', varieties: 'Toma Verde, Pineapple, Purple' },
+      { name: 'Tomatoes (Determinate)', minGallon: 5, diameter: '14–18 inches', perContainer: '1', depth: '12–18 inches', spacing: '—', varieties: 'Bush Early Girl, Patio Princess, Roma' },
+      { name: 'Tomatoes (Indeterminate)', minGallon: '7–10', diameter: '16–20 inches', perContainer: '1', depth: '18+ inches', spacing: '—', varieties: 'Sun Gold, Sweet 100, Cherokee Purple' },
+      { name: 'Zucchini / Summer Squash', minGallon: '5–10', diameter: '16+ inches', perContainer: '1', depth: '12–18 inches', spacing: '18–24 inches', varieties: 'Bush Baby, Eight Ball, Gold Rush' }
     ];
 
     const vegSelect = document.getElementById('vegetableSelect');
@@ -205,16 +222,21 @@
         const veg = vegetables.find(v => v.name === selectedVeg);
         output.innerHTML = `
           <h3>${veg.name} Requirements</h3>
-          <p><strong>Minimum Gallon Size:</strong> ${veg.minGallon} gallons</p>
+          <p><strong>Minimum Gallon Size:</strong> ${veg.minGallon}</p>
           <p><strong>Recommended Container Diameter:</strong> ${veg.diameter}</p>
           <p><strong>Recommended Container Depth:</strong> ${veg.depth}</p>
           <p><strong>Plants per Container:</strong> ${veg.perContainer}</p>
+          <p><strong>Plant Spacing:</strong> ${veg.spacing}</p>
           <p><strong>Recommended Varieties:</strong> ${veg.varieties}</p>
         `;
       } else if (diameter && depth) {
         // Calculate based on container dimensions
         const gallons = Math.round((0.0034 * diameter * diameter * depth) * 10) / 10;
-        const suitable = vegetables.filter(v => v.minGallon <= gallons);
+        const suitable = vegetables.filter(v => {
+          // Handle range values (like "3–5" gallons)
+          const minGallon = parseFloat(v.minGallon) || parseFloat(v.minGallon.split('–')[0]) || parseFloat(v.minGallon.split('+')[0]);
+          return minGallon <= gallons;
+        });
         
         if (suitable.length === 0) {
           output.innerHTML = `
@@ -230,12 +252,11 @@
             <ul>
               ${suitable.map(v => `
                 <li>
-                  <strong>${v.name}</strong> (minimum ${v.minGallon} gallons, 
-                  ${v.perContainer} plants, depth ${v.depth})
-                  <div class="varieties">Varieties: ${v.varieties}</div>
+                  <strong>${v.name}</strong> - Spacing: ${v.spacing}
                 </li>
               `).join('')}
             </ul>
+            <p><em>Note: You may be able to grow more plants if your container is significantly larger than the minimum size.</em></p>
           `;
         }
       } else {

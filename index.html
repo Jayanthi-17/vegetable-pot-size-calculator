@@ -6,7 +6,10 @@
   <title>Vegetable Pot Size Calculator</title>
 </head>
 <body>
-  <script>
+  <div id="vegetablePotCalculatorContainer"></div>
+
+<script>
+  (function() {
     // Create style element and add CSS
     const style = document.createElement('style');
     style.innerHTML = `
@@ -17,7 +20,7 @@
         --border-color: #ddd;
       }
       
-      body {
+      .vegetable-pot-calculator {
         font-family: 'Helvetica Neue', Arial, sans-serif;
         line-height: 1.6;
         color: var(--text-color);
@@ -27,12 +30,14 @@
         background-color: #fff;
       }
       
-      h1, h2, h3 {
+      .vegetable-pot-calculator h1, 
+      .vegetable-pot-calculator h2, 
+      .vegetable-pot-calculator h3 {
         color: var(--primary-color);
         font-weight: 600;
       }
       
-      h1 {
+      .vegetable-pot-calculator h1 {
         text-align: center;
         font-size: 2rem;
         margin-bottom: 1.5rem;
@@ -40,7 +45,7 @@
         padding-bottom: 10px;
       }
       
-      .input-section {
+      .vegetable-pot-calculator .input-section {
         background-color: var(--secondary-color);
         padding: 20px;
         border-radius: 5px;
@@ -48,13 +53,14 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       }
       
-      label {
+      .vegetable-pot-calculator label {
         display: block;
         margin: 15px 0 5px;
         font-weight: 600;
       }
       
-      select, input {
+      .vegetable-pot-calculator select, 
+      .vegetable-pot-calculator input {
         width: 100%;
         padding: 10px;
         border: 1px solid var(--border-color);
@@ -64,19 +70,20 @@
         margin-bottom: 10px;
       }
       
-      select:focus, input:focus {
+      .vegetable-pot-calculator select:focus, 
+      .vegetable-pot-calculator input:focus {
         outline: none;
         border-color: var(--primary-color);
         box-shadow: 0 0 0 2px rgba(173, 42, 36, 0.2);
       }
       
-      .button-group {
+      .vegetable-pot-calculator .button-group {
         display: flex;
         gap: 10px;
         margin-top: 20px;
       }
       
-      button {
+      .vegetable-pot-calculator button {
         background-color: var(--primary-color);
         color: white;
         border: none;
@@ -88,11 +95,11 @@
         flex: 1;
       }
       
-      button:hover {
+      .vegetable-pot-calculator button:hover {
         background-color: #8a221d;
       }
       
-      .output {
+      .vegetable-pot-calculator .output {
         background-color: var(--secondary-color);
         padding: 20px;
         border-radius: 5px;
@@ -100,40 +107,40 @@
         border-left: 4px solid grey;
       }
       
-      .output strong {
+      .vegetable-pot-calculator .output strong {
         color: black;
       }
       
-      .output ul {
+      .vegetable-pot-calculator .output ul {
         padding-left: 20px;
       }
       
-      .output li {
+      .vegetable-pot-calculator .output li {
         margin-bottom: 8px;
       }
       
-      .varieties {
+      .vegetable-pot-calculator .varieties {
         font-style: italic;
         color: #666;
         margin-top: 5px;
       }
       
       @media (max-width: 768px) {
-        body {
+        .vegetable-pot-calculator {
           padding: 15px;
         }
         
-        h1 {
+        .vegetable-pot-calculator h1 {
           font-size: 1.5rem;
         }
         
-        .input-section {
+        .vegetable-pot-calculator .input-section {
           padding: 15px;
         }
       }
       
       @media (max-width: 480px) {
-        .button-group {
+        .vegetable-pot-calculator .button-group {
           flex-direction: column;
         }
       }
@@ -141,66 +148,71 @@
     document.head.appendChild(style);
 
     // Create HTML structure
-    document.body.innerHTML = `
-      <h1>Vegetable Pot Size Calculator</h1>
+    const container = document.getElementById('vegetablePotCalculatorContainer');
+    container.innerHTML = `
+      <div class="vegetable-pot-calculator">
+        <h1>Vegetable Pot Size Calculator</h1>
 
-      <div class="input-section">
-        <h3>Find Pot Requirements</h3>
-        <label>Vegetable Name:</label>
-        <select id="vegetableSelect">
-          <option value="">-- Select a Vegetable --</option>
-        </select>
-        
-        <h3 style="margin-top: 20px;">OR</h3>
-        
-        <label>Container Diameter (inches):</label>
-        <input type="number" id="diameterInput" min="1" step="0.1" placeholder="Enter diameter" />
-        
-        <label>Container Depth (inches):</label>
-        <input type="number" id="depthInput" min="1" step="0.1" placeholder="Enter depth" />
-        
-        <div class="button-group">
-          <button onclick="calculate()">Calculate</button>
-          <button onclick="resetAll()">Reset</button>
+        <div class="input-section">
+          <h3>Find Pot Requirements</h3>
+          <label>Vegetable Name:</label>
+          <select id="vegetableSelect">
+            <option value="">-- Select a Vegetable --</option>
+          </select>
+          
+          <h3 style="margin-top: 20px;">OR</h3>
+          
+          <label>Container Diameter (inches):</label>
+          <input type="number" id="diameterInput" min="1" step="0.1" placeholder="Enter diameter" />
+          
+          <label>Container Depth (inches):</label>
+          <input type="number" id="depthInput" min="1" step="0.1" placeholder="Enter depth" />
+          
+          <div class="button-group">
+            <button id="calculateBtn">Calculate</button>
+            <button id="resetBtn">Reset</button>
+          </div>
         </div>
-      </div>
 
-      <div class="output" id="output"></div>
+        <div class="output" id="output"></div>
+      </div>
     `;
 
     // JavaScript functionality with updated vegetable data
     const vegetables = [
-      { name: 'Beets', minGallon: 2, diameter: '12 inches', perContainer: '~9', depth: '8–10 inches', spacing: '2–3 inches', varieties: 'Detroit Dark Red, Bull\'s Blood, Early Wonder, Red Ace, Chioggia' },
-      { name: 'Bok Choi (Pak Choi)', minGallon: 2, diameter: '10–12 inches', perContainer: '3–5', depth: '8–10 inches', spacing: '4–6 inches', varieties: 'Tatsoi, Mei Qing Choi, Baby Choi' },
-      { name: 'Broccoli', minGallon: 5, diameter: '12–14 inches', perContainer: '1 (2–3 in trough)', depth: '12–18 inches', spacing: '18 inches', varieties: 'De Cicco, Calabrese, Green Magic, Waltham 29' },
-      { name: 'Bush/Snap Beans', minGallon: 2, diameter: '8–10 inches', perContainer: '2–3', depth: '8–10 inches', spacing: '4–6 inches', varieties: 'Blue Lake Bush, Tendergreen, Contender' },
-      { name: 'Carrots', minGallon: 2, diameter: '12 inches', perContainer: '10–12', depth: '10–12 inches', spacing: '1.5–2 inches', varieties: 'Thumbelina, Parisian, Little Finger' },
-      { name: 'Chard (Swiss or Rainbow)', minGallon: 3, diameter: '12 inches', perContainer: '2–3', depth: '8–10 inches', spacing: '6–8 inches', varieties: 'Bright Lights, Fordhook Giant, Rhubarb' },
-      { name: 'Collards', minGallon: '3–5', diameter: '12–14 inches', perContainer: '1–2', depth: '10–12 inches', spacing: '12–18 inches', varieties: 'Georgia Southern, Champion' },
-      { name: 'Cucumbers (Bush)', minGallon: 5, diameter: '12–14 inches', perContainer: '1–2', depth: '10–12 inches', spacing: '12 inches', varieties: 'Spacemaster, Bush Pickle' },
-      { name: 'Eggplant', minGallon: 5, diameter: '12–14 inches', perContainer: '1', depth: '12–14 inches', spacing: '18 inches', varieties: 'Fairy Tale, Patio Baby' },
-      { name: 'Horseradish', minGallon: '5+ gallons (deep)', diameter: '12–14 inches', perContainer: '1 root', depth: '18+ inches', spacing: '12–18 inches', varieties: 'Root cuttings only' },
-      { name: 'Kale', minGallon: '3–5', diameter: '12–14 inches', perContainer: '1–2', depth: '10–12 inches', spacing: '12 inches', varieties: 'Dwarf Blue Curled, Lacinato, Red Russian' },
-      { name: 'Leeks', minGallon: '3–5', diameter: '12–14 inches', perContainer: '6–8', depth: '10–12 inches', spacing: '2–3 inches', varieties: 'King Richard, Lancelot, Tadorna' },
-      { name: 'Lettuce (Leaf)', minGallon: 2, diameter: '12 inches', perContainer: '6–10', depth: '6–8 inches', spacing: '3–4 inches', varieties: 'Black Seeded Simpson, Salad Bowl' },
-      { name: 'Mustard Greens', minGallon: '2–3', diameter: '10–12 inches', perContainer: '4–6', depth: '8–10 inches', spacing: '4–6 inches', varieties: 'Southern Giant, Green Wave, Red Giant' },
-      { name: 'Okra', minGallon: '5+', diameter: '14–16 inches', perContainer: '1', depth: '12–18 inches', spacing: '12–18 inches', varieties: 'Baby Bubba, Clemson Spineless' },
-      { name: 'Onions (Bulbing)', minGallon: '3–5', diameter: '12–14 inches', perContainer: '4–6 bulbs', depth: '10–12 inches', spacing: '3–4 inches', varieties: 'Walla Walla, Candy' },
-      { name: 'Onions – Green (Scallions)', minGallon: 2, diameter: '10–12 inches', perContainer: '10–12', depth: '6–8 inches', spacing: '1.5–2 inches', varieties: 'White Lisbon, Evergreen Bunching' },
-      { name: 'Peppers', minGallon: '3–5', diameter: '12–14 inches', perContainer: '1 (2 in 10+ gal)', depth: '12+ inches', spacing: '12–15 inches', varieties: 'Lunchbox, Jalapeño, Sweet Banana' },
-      { name: 'Pole Beans', minGallon: 5, diameter: '12–14 inches', perContainer: '1–2', depth: '12+ inches', spacing: '6 inches', varieties: 'Kentucky Blue, Fortex, Rattlesnake' },
-      { name: 'Potatoes', minGallon: '10+', diameter: '14–16 inches', perContainer: '2–3 seed potatoes', depth: '12–16 inches', spacing: '10–12 inches', varieties: 'Yukon Gold, Red Norland, Fingerling' },
-      { name: 'Radishes', minGallon: '1–2', diameter: '10–12 inches', perContainer: '12–16', depth: '6–8 inches', spacing: '1.5–2 inches', varieties: 'Cherry Belle, French Breakfast' },
-      { name: 'Spinach', minGallon: 2, diameter: '10–12 inches', perContainer: '6–8', depth: '6–8 inches', spacing: '3–4 inches', varieties: 'Bloomsdale, Space, Tyee' },
-      { name: 'Swiss Chard', minGallon: 3, diameter: '12 inches', perContainer: '2–3', depth: '8–10 inches', spacing: '6–8 inches', varieties: 'Bright Lights, Lucullus' },
-      { name: 'Tomatillos', minGallon: '5+', diameter: '14–18 inches', perContainer: '1 (need 2 nearby)', depth: '12–18 inches', spacing: '18–24 inches', varieties: 'Toma Verde, Pineapple, Purple' },
-      { name: 'Tomatoes (Determinate)', minGallon: 5, diameter: '14–18 inches', perContainer: '1', depth: '12–18 inches', spacing: '—', varieties: 'Bush Early Girl, Patio Princess, Roma' },
-      { name: 'Tomatoes (Indeterminate)', minGallon: '7–10', diameter: '16–20 inches', perContainer: '1', depth: '18+ inches', spacing: '—', varieties: 'Sun Gold, Sweet 100, Cherokee Purple' },
-      { name: 'Zucchini / Summer Squash', minGallon: '5–10', diameter: '16+ inches', perContainer: '1', depth: '12–18 inches', spacing: '18–24 inches', varieties: 'Bush Baby, Eight Ball, Gold Rush' }
+      { name: 'Beets', minGallon: 2, diameter: '9 inches', perContainer: '2 to 3', depth: '9 inches', spacing: '2–3 inches', varieties: 'Detroit Dark Red, Bull\'s Blood, Early Wonder, Red Ace, Chioggia' },
+      { name: 'Bok Choi (Pak Choi)', minGallon: 2, diameter: '9 inches', perContainer: '1 to 2', depth: '9 inches', spacing: '4–6 inches', varieties: 'Tatsoi, Mei Qing Choi, Baby Choi' },
+      { name: 'Broccoli', minGallon: 5, diameter: '12 inches', perContainer: '1 plant', depth: '12 inches', spacing: '12-18 inches', varieties: 'De Cicco, Calabrese, Green Magic, Waltham 29' },
+      { name: 'Beans (Bush)', minGallon: 2, diameter: '9 inches', perContainer: '1 to 3', depth: '9 inches', spacing: '4–6 inches', varieties: 'Blue Lake Bush, Tendergreen, Contender' },
+      { name: 'Pole Beans', minGallon: 5, diameter: '12 inches', perContainer: '1–2', depth: '12 inches', spacing: '6 inches', varieties: 'Kentucky Blue, Fortex, Rattlesnake' },
+      { name: 'Carrots', minGallon: 5, diameter: '12 inches', perContainer: '10 to 15', depth: '12 inches', spacing: '2-3 inches', varieties: 'Thumbelina, Parisian, Little Finger' },
+      { name: 'Chard (Swiss or Rainbow)', minGallon: 3, diameter: '10 inches', perContainer: '2–3', depth: '10 inches', spacing: '4–6 inches', varieties: 'Bright Lights, Fordhook Giant, Rhubarb' },
+      { name: 'Collards', minGallon: '3–5', diameter: '10–12 inches', perContainer: '1–2', depth: '10–12 inches', spacing: '12 inches', varieties: 'Georgia Southern, Champion' },
+      { name: 'Cucumbers (Bush)', minGallon: 5, diameter: '12 inches', perContainer: '1–2', depth: '12 inches', spacing: '12 inches', varieties: 'Spacemaster, Bush Pickle' },
+      { name: 'Eggplant', minGallon: 5, diameter: '12 inches', perContainer: '1', depth: '12 inches', spacing: '18 inches', varieties: 'Fairy Tale, Patio Baby' },
+      { name: 'Horseradish', minGallon: '5+ gallons', diameter: '12+ inches', perContainer: '1 root', depth: '8 to 10 inches', spacing: '12–18 inches', varieties: 'Root cuttings only' },
+      { name: 'Kale', minGallon: '3–5', diameter: '10–12 inches', perContainer: '1–2', depth: '10–12 inches', spacing: '12 inches', varieties: 'Dwarf Blue Curled, Lacinato, Red Russian' },
+      { name: 'Leeks', minGallon: '3–5', diameter: '10-12 inches', perContainer: '6–8', depth: '10–12 inches', spacing: '4-5 inches', varieties: 'King Richard, Lancelot, Tadorna' },
+      { name: 'Lettuce', minGallon: '1-2', diameter: '7-9 inches', perContainer: '2 to 6', depth: '7 to 9 inches', spacing: '4 to 6 inches', varieties: 'Black Seeded Simpson, Salad Bowl' },
+      { name: 'Mustard Greens', minGallon: '2–3', diameter: '9–10 inches', perContainer: '4–6', depth: '9–10 inches', spacing: '4–6 inches', varieties: 'Southern Giant, Green Wave, Red Giant' },
+      { name: 'Okra', minGallon: '5+ gallons', diameter: '12+ inches', perContainer: '1', depth: '12+', spacing: '12–18 inches', varieties: 'Baby Bubba, Clemson Spineless' },
+      { name: 'Onions (Bulbing)', minGallon: '3–5', diameter: '10–12 inches', perContainer: '4–6 bulbs', depth: '10-12 inches', spacing: '3–4 inches', varieties: 'Walla Walla, Candy' },
+      { name: 'Onions – Green (Scallions)', minGallon: 2, diameter: '9 inches', perContainer: '10–12', depth: '9 inches', spacing: '1.5–2 inches', varieties: 'White Lisbon, Evergreen Bunching' },
+      { name: 'Peppers', minGallon: '3–5', diameter: '10–12 inches', perContainer: '1 plant', depth: '10-12 inches', spacing: '12–15 inches', varieties: 'Lunchbox, Jalapeño, Sweet Banana' },
+      { name: 'Potatoes', minGallon: '10-30', diameter: '14–16 inches', perContainer: '3–5 seed potatoes', depth: '16-24 inches', spacing: '8-12 inches', varieties: 'Yukon Gold, Red Norland, Fingerling' },
+      { name: 'Radishes', minGallon: 2, diameter: '9 inches', perContainer: '5 to 6', depth: '9 inches', spacing: '2 inches', varieties: 'Cherry Belle, French Breakfast' },
+      { name: 'Spinach', minGallon: 2, diameter: '9 inches', perContainer: '6–8', depth: '9 inches', spacing: '3–4 inches', varieties: 'Bloomsdale, Space, Tyee' },
+      { name: 'Swiss Chard', minGallon: 3, diameter: '10 inches', perContainer: '2–3', depth: '10 inches', spacing: '6–8 inches', varieties: 'Bright Lights, Lucullus' },
+      { name: 'Tomatillos', minGallon: '5-10', diameter: '12 to 16 inches', perContainer: '1 (need 2 nearby)', depth: '12–16 inches', spacing: '18–24 inches', varieties: 'Toma Verde, Pineapple, Purple' },
+      { name: 'Tomatoes (Determinate)', minGallon: '5-10', diameter: '12 to 16 inches', perContainer: '1', depth: '12–16 inches', spacing: '—', varieties: 'Bush Early Girl, Patio Princess, Roma' },
+      { name: 'Tomatoes (Indeterminate)', minGallon: '15-25', diameter: '18–22 inches', perContainer: '1', depth: '18 inches', spacing: '—', varieties: 'Sun Gold, Sweet 100, Cherokee Purple' },
+      { name: 'Zucchini / Summer Squash', minGallon: '5-10', diameter: '12 to 16 inches', perContainer: '1 plant', depth: '12–16 inches', spacing: '18–24 inches', varieties: 'Bush Baby, Eight Ball, Gold Rush' }
     ];
 
-    const vegSelect = document.getElementById('vegetableSelect');
-    const output = document.getElementById('output');
+    const vegSelect = container.querySelector('#vegetableSelect');
+    const output = container.querySelector('#output');
+    const calculateBtn = container.querySelector('#calculateBtn');
+    const resetBtn = container.querySelector('#resetBtn');
 
     // Populate vegetable dropdown
     vegetables.forEach(veg => {
@@ -210,10 +222,10 @@
       vegSelect.appendChild(opt);
     });
 
-    window.calculate = function() {
+    function calculate() {
       const selectedVeg = vegSelect.value;
-      const diameter = parseFloat(document.getElementById('diameterInput').value);
-      const depth = parseFloat(document.getElementById('depthInput').value);
+      const diameter = parseFloat(container.querySelector('#diameterInput').value);
+      const depth = parseFloat(container.querySelector('#depthInput').value);
       
       output.innerHTML = '';
       
@@ -222,7 +234,7 @@
         const veg = vegetables.find(v => v.name === selectedVeg);
         output.innerHTML = `
           <h3>${veg.name} Requirements</h3>
-          <p><strong>Minimum Gallon Size:</strong> ${veg.minGallon}</p>
+          <p><strong>Gallon Size:</strong> ${veg.minGallon}</p>
           <p><strong>Recommended Container Diameter:</strong> ${veg.diameter}</p>
           <p><strong>Recommended Container Depth:</strong> ${veg.depth}</p>
           <p><strong>Plants per Container:</strong> ${veg.perContainer}</p>
@@ -262,14 +274,19 @@
       } else {
         output.innerHTML = '<p>Please either select a vegetable or enter container dimensions.</p>';
       }
-    };
+    }
 
-    window.resetAll = function() {
+    function resetAll() {
       vegSelect.value = '';
-      document.getElementById('diameterInput').value = '';
-      document.getElementById('depthInput').value = '';
+      container.querySelector('#diameterInput').value = '';
+      container.querySelector('#depthInput').value = '';
       output.innerHTML = '';
-    };
-  </script>
+    }
+
+    // Add event listeners
+    calculateBtn.addEventListener('click', calculate);
+    resetBtn.addEventListener('click', resetAll);
+  })();
+</script>
 </body>
 </html>

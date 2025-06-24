@@ -126,6 +126,14 @@
       
       #vegetablePotCalculatorContainer .vegetable-name {
         font-weight: bold;
+        color: var(--primary-color);
+        cursor: pointer;
+        text-decoration: underline;
+        transition: color 0.2s;
+      }
+      
+      #vegetablePotCalculatorContainer .vegetable-name:hover {
+        color: #8a221d;
       }
       
       #vegetablePotCalculatorContainer .spacing-header {
@@ -149,8 +157,8 @@
         display: inline-block;
         margin-top: 15px;
         padding: 8px 15px;
-        background-color: #d3d3d3;
-        color: black;
+        background-color: #4a7c59;
+        color: white;
         text-decoration: none;
         border-radius: 4px;
         font-weight: bold;
@@ -323,12 +331,20 @@
             <ul>
               ${suitable.map(v => `
                 <li>
-                  <span class="vegetable-name">${v.name}</span>
+                  <span class="vegetable-name" data-url="${v.guideUrl}">${v.name}</span>
                   <span>${v.spacing}</span>
                 </li>
               `).join('')}
             </ul>
           `;
+          
+          // Add click event listeners to each vegetable name
+          const vegNames = output.querySelectorAll('.vegetable-name');
+          vegNames.forEach(name => {
+            name.addEventListener('click', function() {
+              window.open(this.dataset.url, '_blank');
+            });
+          });
         }
       } else {
         output.innerHTML = '<p>Please either select a vegetable or enter container dimensions.</p>';

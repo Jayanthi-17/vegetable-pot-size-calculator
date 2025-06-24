@@ -13,14 +13,14 @@
     // Create style element and add CSS
     const style = document.createElement('style');
     style.innerHTML = `
-      :root {
+      #vegetablePotCalculatorContainer {
         --primary-color: #ad2a24;
         --secondary-color: #f5f5f5;
         --text-color: #333;
         --border-color: #ddd;
       }
       
-      .vegetable-pot-calculator {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator {
         font-family: 'Helvetica Neue', Arial, sans-serif;
         line-height: 1.6;
         color: var(--text-color);
@@ -30,14 +30,14 @@
         background-color: #fff;
       }
       
-      .vegetable-pot-calculator h1, 
-      .vegetable-pot-calculator h2, 
-      .vegetable-pot-calculator h3 {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator h1, 
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator h2, 
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator h3 {
         color: var(--primary-color);
         font-weight: 600;
       }
       
-      .vegetable-pot-calculator h1 {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator h1 {
         text-align: center;
         font-size: 2rem;
         margin-bottom: 1.5rem;
@@ -45,7 +45,7 @@
         padding-bottom: 10px;
       }
       
-      .vegetable-pot-calculator .input-section {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator .input-section {
         background-color: var(--secondary-color);
         padding: 20px;
         border-radius: 5px;
@@ -53,41 +53,42 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       }
       
-      .vegetable-pot-calculator label {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator label {
         display: block;
         margin: 15px 0 5px;
         font-weight: 600;
       }
       
-      .vegetable-pot-calculator select, 
-      .vegetable-pot-calculator input {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator select, 
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator input {
         width: 100%;
-        padding: 10px;
+        padding: 12px;
         border: 1px solid var(--border-color);
         border-radius: 4px;
         font-size: 1rem;
         box-sizing: border-box;
         margin-bottom: 10px;
+        -webkit-appearance: none;
       }
       
-      .vegetable-pot-calculator select:focus, 
-      .vegetable-pot-calculator input:focus {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator select:focus, 
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator input:focus {
         outline: none;
         border-color: var(--primary-color);
         box-shadow: 0 0 0 2px rgba(173, 42, 36, 0.2);
       }
       
-      .vegetable-pot-calculator .button-group {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator .button-group {
         display: flex;
         gap: 10px;
         margin-top: 20px;
       }
       
-      .vegetable-pot-calculator button {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator button {
         background-color: var(--primary-color);
         color: white;
         border: none;
-        padding: 10px 20px;
+        padding: 12px 20px;
         border-radius: 4px;
         cursor: pointer;
         font-size: 1rem;
@@ -95,11 +96,11 @@
         flex: 1;
       }
       
-      .vegetable-pot-calculator button:hover {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator button:hover {
         background-color: #8a221d;
       }
       
-      .vegetable-pot-calculator .output {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator .output {
         background-color: var(--secondary-color);
         padding: 20px;
         border-radius: 5px;
@@ -107,27 +108,27 @@
         border-left: 4px solid grey;
       }
       
-      .vegetable-pot-calculator .output strong {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator .output strong {
         color: black;
       }
       
-      .vegetable-pot-calculator .output ul {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator .output ul {
         padding-left: 0;
         list-style-type: none;
       }
       
-      .vegetable-pot-calculator .output li {
+      #vegetablePotCalculatorContainer .vegetable-pot-calculator .output li {
         display: flex;
         justify-content: space-between;
         padding: 8px 0;
         border-bottom: 1px solid #eee;
       }
       
-      .vegetable-name {
+      #vegetablePotCalculatorContainer .vegetable-name {
         font-weight: bold;
       }
       
-      .spacing-header {
+      #vegetablePotCalculatorContainer .spacing-header {
         display: flex;
         justify-content: space-between;
         padding: 8px 0;
@@ -136,31 +137,46 @@
         margin-bottom: 5px;
       }
       
-      .vegetable-details {
+      #vegetablePotCalculatorContainer .vegetable-details {
         margin-top: 15px;
       }
       
-      .vegetable-details p {
+      #vegetablePotCalculatorContainer .vegetable-details p {
         margin: 8px 0;
       }
       
       @media (max-width: 768px) {
-        .vegetable-pot-calculator {
+        #vegetablePotCalculatorContainer .vegetable-pot-calculator {
           padding: 15px;
         }
         
-        .vegetable-pot-calculator h1 {
+        #vegetablePotCalculatorContainer .vegetable-pot-calculator h1 {
           font-size: 1.5rem;
         }
         
-        .vegetable-pot-calculator .input-section {
+        #vegetablePotCalculatorContainer .vegetable-pot-calculator .input-section {
           padding: 15px;
+        }
+        
+        #vegetablePotCalculatorContainer .vegetable-pot-calculator select, 
+        #vegetablePotCalculatorContainer .vegetable-pot-calculator input {
+          padding: 14px;
+          font-size: 16px; /* Larger font for mobile inputs */
+        }
+        
+        #vegetablePotCalculatorContainer .vegetable-pot-calculator button {
+          padding: 14px 20px;
         }
       }
       
       @media (max-width: 480px) {
-        .vegetable-pot-calculator .button-group {
+        #vegetablePotCalculatorContainer .vegetable-pot-calculator .button-group {
           flex-direction: column;
+        }
+        
+        #vegetablePotCalculatorContainer .vegetable-pot-calculator select, 
+        #vegetablePotCalculatorContainer .vegetable-pot-calculator input {
+          padding: 16px;
         }
       }
     `;
@@ -174,18 +190,18 @@
 
         <div class="input-section">
           <h3>Find Pot Requirements</h3>
-          <label>Vegetable Name:</label>
+          <label for="vegetableSelect">Vegetable Name:</label>
           <select id="vegetableSelect">
             <option value="">-- Select a Vegetable --</option>
           </select>
           
           <h3 style="margin-top: 20px;">OR</h3>
           
-          <label>Container Diameter (inches):</label>
-          <input type="number" id="diameterInput" min="1" step="0.1" placeholder="Enter diameter" />
+          <label for="diameterInput">Container Diameter (inches):</label>
+          <input type="number" id="diameterInput" min="1" step="0.1" placeholder="Enter diameter" inputmode="decimal" />
           
-          <label>Container Depth (inches):</label>
-          <input type="number" id="depthInput" min="1" step="0.1" placeholder="Enter depth" />
+          <label for="depthInput">Container Depth (inches):</label>
+          <input type="number" id="depthInput" min="1" step="0.1" placeholder="Enter depth" inputmode="decimal" />
           
           <div class="button-group">
             <button id="calculateBtn">Calculate</button>
@@ -310,6 +326,15 @@
     // Add event listeners
     calculateBtn.addEventListener('click', calculate);
     resetBtn.addEventListener('click', resetAll);
+    
+    // Better mobile input handling
+    container.querySelector('#diameterInput').addEventListener('focus', function() {
+      this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    
+    container.querySelector('#depthInput').addEventListener('focus', function() {
+      this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
   })();
 </script>
 </body>

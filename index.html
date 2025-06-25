@@ -315,18 +315,18 @@
         
         if (suitable.length === 0) {
           output.innerHTML = `
-            <h3>Container Analysis</h3>
+            <h3>Which Veggies Fit!</h3>
             <p>Your container is approximately <strong>${gallons} gallons</strong>.</p>
             <p>No vegetables fit in this container size. Consider a larger container.</p>
           `;
         } else {
           output.innerHTML = `
-            <h3>Container Analysis</h3>
+            <h3>Which Veggies Fit!</h3>
             <p>Your container is approximately <strong>${gallons} gallons</strong>.</p>
             <p>Suitable vegetables for this container size:</p>
             <div class="spacing-header">
               <span>Vegetable</span>
-              <span>Spacing Requirement</span>
+              <span>plants per container</span>
             </div>
             <ul>
               ${suitable.map(v => `
